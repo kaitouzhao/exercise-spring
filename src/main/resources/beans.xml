@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="aspectBean" class="kaitou.exercise.spring.aop.TestAspect"/>
+    <bean id="messageService" class="kaitou.exercise.spring.hello.MessageServiceImpl"/>
+    <bean id="messagePrinter" class="kaitou.exercise.spring.hello.MessagePrinter">
+        <property name="messageService" ref="messageService"/>
+    </bean>
+
+    <aopConfig>
+        <aspectBeans>
+            <aspectBean id="aspect" ref="aspectBean">
+                <pointcuts>
+                    <pointcut id="target" ref="messageService"/>
+                    <pointcut id="target" ref="messagePrinter" type="cglib"/>
+                </pointcuts>
+            </aspectBean>
+        </aspectBeans>
+    </aopConfig>
+
+</beans>
